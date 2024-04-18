@@ -53,57 +53,43 @@ H0, H1, H2, H3, H4, H5: Word buffers with final message digest
 ```
 ## PROGRAM
 ```
-import java.security.*;
-public class SHA1 {
-public static void main(String[] a) {
-try {
-MessageDigest md = MessageDigest.getInstance("SHA1");
-System.out.println("Message digest object info: ");
-System.out.println(" Algorithm = " +md.getAlgorithm());
-System.out.println(" Provider = " +md.getProvider());
-System.out.println(" ToString = " +md.toString());
-String input = "";
-md.update(input.getBytes());
-byte[] output = md.digest();
-System.out.println();
-System.out.println("SHA1(\""+input+"\") = " +bytesToHex(output));
-input = "abc";
-md.update(input.getBytes());
-output = md.digest();
-System.out.println();
-System.out.println("SHA1(\""+input+"\") = " +bytesToHex(output));
-input = "abcdefghijklmnopqrstuvwxyz";
-md.update(input.getBytes());
-output = md.digest();
-System.out.println();
-System.out.println("SHA1(\"" +input+"\") = " +bytesToHex(output));
-System.out.println(""); }
-catch (Exception e) {
-System.out.println("Exception: " +e);
-}
-}
-public static String bytesToHex(byte[] b) {
-char hexDigit[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-StringBuffer buf = new StringBuffer();
-for (int j=0; j<b.length; j++) {
-buf.append(hexDigit[(b[j] >> 4) & 0x0f]);
-buf.append(hexDigit[b[j] & 0x0f]); }
-return buf.toString(); }
-}
+import hashlib
+
+def sha1_hash(input_str):
+    sha1 = hashlib.sha1()
+    sha1.update(input_str.encode())
+    return sha1.hexdigest()
+
+def main():
+import hashlib
+
+def sha1_hash(input_str):
+    sha1 = hashlib.sha1()
+    sha1.update(input_str.encode())
+    return sha1.hexdigest()
+
+def main():
+    # Compute hash for ""
+    input_str = ""
+    print(f'SHA1("{input_str}") = {sha1_hash(input_str)}')
+
+    # Compute hash for "abc"
+    input_str = "abc"
+    print(f'SHA1("{input_str}") = {sha1_hash(input_str)}')
+
+    # Compute hash for "abcdefghijklmnopqrstuvwxyz"
+    input_str = "abcdefghijklmnopqrstuvwxyz"
+    print(f'SHA1("{input_str}") = {sha1_hash(input_str)}')
+
+if __name__ == "__main__":
+    main()
+    
+if __name__ == "__main__":
+    main()
 ```
 ## OUTPUT:
-```
-C:\Program Files\Java\jdk1.6.0_20\bin>javac SHA1.java
-C:\Program Files\Java\jdk1.6.0_20\bin>java SHA1
-Message digest object info:
-Algorithm = SHA1
-Provider = SUN version 1.6
-ToString = SHA1 Message Digest from SUN, <initialized>
-SHA1("") = DA39A3EE5E6B4B0D3255BFEF95601890AFD80709
-SHA1("abc") = A9993E364706816ABA3E25717850C26C9CD0D89D
-SHA1("abcdefghijklmnopqrstuvwxyz") =
-32D10C7B8CF96570CA04CE37F2A19D84240D3A89
-```
+![image](https://github.com/IsaacAIML2023/Ex-04/assets/121918391/9706b3b3-fd0e-455c-b08e-f828a4eec8eb)
+
 ## RESULT:
 Thus SHA was implemented successfully.
 
